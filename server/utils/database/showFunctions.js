@@ -25,6 +25,13 @@ const searchByTitle = async (title) => {
   return response;
 };
 
+const searchByCategory = async (category) => {
+  const response = await shows
+    .find({ category: { $regex: category, $options: "i" } })
+    .toArray();
+  return response;
+};
+
 const addShow = async (show) => {
   const response = await shows.insertOne(show);
   return response.insertedId;
@@ -34,5 +41,6 @@ module.exports = {
   getAll: getAll,
   getById: getById,
   searchByTitle: searchByTitle,
-  addShow: addShow
+  addShow: addShow,
+  searchByCategory: searchByCategory
 };
