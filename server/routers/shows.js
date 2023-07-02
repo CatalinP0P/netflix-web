@@ -4,6 +4,7 @@ const {
   getAll,
   getById,
   searchByTitle,
+  searchByCategory,
   addShow,
 } = require("../utils/database/showFunctions");
 
@@ -16,9 +17,19 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:search", async (req, res) => {
+router.get("/:id", async (req, res) => {
+  const show = await getById(req.params.id);
+  res.json(show);
+});
+
+router.get("/q/:search", async (req, res) => {
   const shows = await searchByTitle(req.params.search);
   res.json(shows);
+});
+
+router.get("/category/:category", async (req, res) => {
+  const show = await searchByCategory(req.params.category);
+  res.json(show);
 });
 
 router.post("/", async (req, res) => {
