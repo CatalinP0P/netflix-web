@@ -2,17 +2,13 @@ import React, { useEffect, useState } from "react";
 import Containter from "../Containter";
 
 import bellSvg from "../../assets/bell.svg";
-import searchSvg from "../../assets/search.svg";
 import netflixLogo from "../../assets/netflix-logo.svg";
-import { getByPlaceholderText } from "@testing-library/react";
+import SearchBar from "./SearchBar";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [top, setTop] = useState(true);
-  const [searchVisiblity, setSearch] = useState(false);
-
-  const toggleSearch = () => {
-    setSearch(!searchVisiblity);
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -33,7 +29,11 @@ export default function Header() {
     >
       <Containter className="flex flex-row justify-between w-full gap-4 items-center">
         <div className="flex flex-row gap-8 items-center">
-          <img className="h-[28px]" src={netflixLogo} />
+          <img
+            className="h-[28px] cursor-pointer"
+            src={netflixLogo}
+            onClick={() => navigate("/")}
+          />
           <div className="flex flex-row gap-6 text-sm font-light items-center text-muted">
             <a className="font-semibold text-white">Home</a>
             <a>TV Shows</a>
@@ -43,23 +43,7 @@ export default function Header() {
           </div>
         </div>
         <div className="flex flex-row items-center gap-6">
-          <div
-            className={
-              "flex flex-row items-center overflow-hidden gap-2 p-1 transition-all " +
-              (searchVisiblity
-                ? " max-w-[150px] px-2 border border-white rounded-sm"
-                : " max-w-[30px]")
-            }
-          >
-            <img src={searchSvg} className="h-[18x]" onClick={toggleSearch} />
-            <input
-              placeholder="Search..."
-              className={
-                "outline-none bg-transparent text-white px-2 w-full " +
-                (searchVisiblity ? " " : " hidden")
-              }
-            />
-          </div>
+          <SearchBar />
           <img src={bellSvg} className="h-[20px]" />
           <button className="bg-customred text-white hover:bg-customredhover rounded-sm py-2 text-sm px-4">
             Sign in
