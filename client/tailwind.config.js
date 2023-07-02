@@ -7,6 +7,7 @@ module.exports = {
         muted: "#ccd5e1",
         customred: "#dc2626",
         customredhover: "#ba1b1c",
+        secondary: "#1f293b",
       },
     },
   },

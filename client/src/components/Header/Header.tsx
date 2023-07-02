@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <div
       className={
-        "fixed top-0 left-0 right-0 flex flex-row w-full transition-all justify-center py-3 " +
+        "fixed top-0 left-0 right-0 flex flex-row w-full transition-all justify-center py-3 z-[1000] " +
         (top ? " bg-transparent" : " bg-[#171717] shadow-md")
       }
     >
@@ -45,9 +45,9 @@ export default function Header() {
         <div className="flex flex-row items-center gap-6">
           <SearchBar />
           <img src={bellSvg} className="h-[20px]" />
-          <button className="bg-customred text-white hover:bg-customredhover rounded-sm py-2 text-sm px-4">
+          <button className="bg-customred text-white hover:bg-customredhover rounded-[5px] py-[.4rem] text-sm px-4">
             Sign in
-          </button>
+          </button>1
         </div>
       </Containter>
     </div>
