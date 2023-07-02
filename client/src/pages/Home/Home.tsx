@@ -37,9 +37,6 @@ export default function Home() {
             <InfoButton />
           </div>
         </div>
-
-
-        
       </Containter>
     </>
   );
