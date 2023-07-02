@@ -47,7 +47,7 @@ export default function Header() {
           <img src={bellSvg} className="h-[20px]" />
           <button className="bg-customred text-white hover:bg-customredhover rounded-[5px] py-[.4rem] text-sm px-4">
             Sign in
-          </button>1
+          </button>
         </div>
       </Containter>
     </div>
