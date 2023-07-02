@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import heroImage from "../../assets/johnwick4.jpeg";
 import Containter from "../../components/Containter";
 import PlayButton from "../../components/PlayButton";
 import InfoButton from "../../components/InfoButton";
+import { useDB } from "../../context/DatabaseContext";
+import HorizontalShowcase from "../../components/HorizontalShowcase";
 
 export default function Home() {
+  const [shows, setShows] = useState(null);
+  const db = useDB();
+
+  const fetchShows = async () => {
+    const response = await db.get();
+    setShows(response);
+    console.log(response);
+  };
+
+  useEffect(() => {
+    fetchShows();
+  }, []);
+
   return (
     <>
       <img
@@ -14,7 +29,7 @@ export default function Home() {
       <div className="absolute top-0 left-0 w-full min-h-screen bg-[rgba(0,0,0,.5)] z-[2]" />
 
       <Containter className="text-white z-[100] pt-48">
-        <div className="w-[45%] flex flex-col gap-3">
+        <div className="w-[45%] flex flex-col gap-3 pb-8">
           <label className="text-4xl font-bold z-[100]">
             John Wick: Chapter 4
           </label>
@@ -37,6 +52,21 @@ export default function Home() {
             <InfoButton />
           </div>
         </div>
+        {shows ? (
+          <HorizontalShowcase
+            className="mt-16"
+            title="Trending Now"
+            shows={shows}
+          />
+        ) : null}
+
+        {shows ? (
+          <HorizontalShowcase
+            className="mt-16"
+            title="Action"
+            shows={shows}
+          />
+        ) : null}
       </Containter>
     </>
   );
