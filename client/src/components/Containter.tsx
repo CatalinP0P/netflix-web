@@ -8,7 +8,7 @@ export default function Containter({
   className?: string;
 }) {
   return (
-    <div className={"max-w-[1200px] w-full px-2 mx-auto " + className}>
+    <div className={"max-w-[1200px] w-[95%] px-2 mx-auto " + className}>
       {children}
     </div>
   );
