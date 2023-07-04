@@ -8,7 +8,7 @@ import SmallLogo from "../../assets/smallLogo.png";
 import profileImage from "../../assets/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg";
 import { ReactComponent as ArrowUP } from "../../assets/arrow-trend-up.svg";
 import { ReactComponent as AngleUP } from "../../assets/angle-up.svg";
-import { ReactComponent as Question } from "../../assets/question-circle.svg"
+import { ReactComponent as Question } from "../../assets/question-circle.svg";
 import { ReactComponent as Bell } from "../../assets/bell.svg";
 import { ReactComponent as MovieClapper } from "../../assets/movie-clapper-solid-svgrepo-com.svg";
 import { ReactComponent as House } from "../../assets/house-chimney.svg";

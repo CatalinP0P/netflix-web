@@ -28,7 +28,6 @@ export default function Home() {
   const fetchShows = async () => {
     const random = await db.getRandomShow();
     setRandomShow(random);
-    console.log(random);
 
     const trending = await db.get("");
     setShowsTrending(trending);

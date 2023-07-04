@@ -1,8 +1,10 @@
 import React from "react";
 import { useAuth } from "../../context/AuthContext";
 import { ReactComponent as Google } from "../../assets/google.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Signin() {
+  const navigate = useNavigate();
   const auth = useAuth();
 
   return (
@@ -13,7 +15,11 @@ export default function Signin() {
         </label>
         <button
           className="bg-customred text-muted py-3 rounded-md w-full flex flex-row gap-2 justify-center items-center"
-          onClick={async () => await auth.signInWithGoogle()}
+          onClick={() =>
+            auth.signInWithGoogle().then(() => {
+              navigate("/");
+            })
+          }
         >
           <Google className="w-[16px] h-[16px] fill-white" />
           Google
