@@ -64,7 +64,7 @@ export default function Home() {
       <div className="absolute top-0 left-0 w-full min-h-screen gradient-transparent-to-black z-[5]" />
 
       <Containter className="text-white z-[100] pt-48">
-        <div className="w-[45%] flex flex-col gap-3 pb-8">
+        <div className="w-full lg:w-[45%] flex flex-col gap-3 pb-8">
           <label className="text-4xl font-bold z-[100]">
             {showRandom.title}
           </label>
@@ -80,7 +80,7 @@ export default function Home() {
           </p>
           <div className="flex flex-row gap-2 z-[100]">
             <PlayButton onClick={() => openShow(showRandom)} />
-            <InfoButton onClick={() => openShow(showRandom)}/>
+            <InfoButton onClick={() => openShow(showRandom)} />
           </div>
         </div>
         {showsAction && showsTrending ? (
