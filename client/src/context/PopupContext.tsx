@@ -9,11 +9,14 @@ export const usePopup = () => {
 export function PopupProvider({ children }: { children: React.ReactNode }) {
   const [showVisibility, setShowVisibility] = useState(false);
   const [mobileMenuVisibility, setMobileMenuVisibility] = useState(false);
+  const [accountVisibility, setAccountVisibility] = useState(false);
+
   const [show, setShow] = useState(null);
 
   const closeAll = () => {
     setShowVisibility(false);
     setMobileMenuVisibility(false);
+    setAccountVisibility(false);
     setShow(null);
   };
 
@@ -27,6 +30,8 @@ export function PopupProvider({ children }: { children: React.ReactNode }) {
         setShowVisibility: setShowVisibility,
         mobileMenuVisibility: mobileMenuVisibility,
         setMobileMenuVisibility: setMobileMenuVisibility,
+        accountVisibility: accountVisibility,
+        setAccountVisibility: setAccountVisibility,
       }}
     >
       {showVisibility && (
@@ -35,7 +40,7 @@ export function PopupProvider({ children }: { children: React.ReactNode }) {
           onClick={closeAll}
         ></div>
       )}
-      {mobileMenuVisibility && (
+      {(mobileMenuVisibility || accountVisibility) && (
         <div
           className="fixed left-0 top-0 w-full h-full z-[1000]"
           onClick={() => closeAll()}
