@@ -5,6 +5,7 @@ import bellSvg from "../../assets/bell.svg";
 import { ReactComponent as NetflixLogo } from "../../assets/netflix-logo.svg";
 import SearchBar from "./SearchBar";
 import SmallLogo from "../../assets/smallLogo.png";
+import profileImage from "../../assets/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg";
 import { ReactComponent as ArrowUP } from "../../assets/arrow-trend-up.svg";
 import { ReactComponent as Bell } from "../../assets/bell.svg";
 import { ReactComponent as MovieClapper } from "../../assets/movie-clapper-solid-svgrepo-com.svg";
@@ -14,11 +15,14 @@ import { ReactComponent as List } from "../../assets/list.svg";
 
 import { useNavigate } from "react-router-dom";
 import { usePopup } from "../../context/PopupContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Header() {
   const [top, setTop] = useState(true);
   const { mobileMenuVisibility, setMobileMenuVisibility } = usePopup();
+
   const navigate = useNavigate();
+  const auth = useAuth();
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -109,9 +113,13 @@ export default function Header() {
         <div className="flex flex-row items-center gap-6">
           <SearchBar />
           <img src={bellSvg} className="hidden lg:flex h-[20px]" />
-          <button className="bg-customred text-white hover:bg-customredhover rounded-[5px] py-[.4rem] text-sm px-4">
-            Sign in
-          </button>
+          {auth.user ? (
+            <img src={profileImage} className="w-[24px] h-[24px]" onClick={async () => await auth.signOut()} />
+          ) : (
+            <button className="bg-customred text-white hover:bg-customredhover rounded-[5px] py-[.4rem] text-sm px-4">
+              Sign in
+            </button>
+          )}
         </div>
       </Containter>
     </div>

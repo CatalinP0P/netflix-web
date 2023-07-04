@@ -8,23 +8,26 @@ import Error from "./pages/Error/Error";
 import { DatabaseProvdier } from "./context/DatabaseContext";
 import { PopupProvider } from "./context/PopupContext";
 import ShowPopup from "./components/popups/ShowPopup";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
     <div>
       <DatabaseProvdier>
-        <BrowserRouter>
-          <PopupProvider>
-            <Layout>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/add" element={<Add />} />
-                <Route path="*" element={<Error />} />
-              </Routes>
-            </Layout>
-            <ShowPopup />
-          </PopupProvider>
-        </BrowserRouter>
+        <AuthProvider>
+          <BrowserRouter>
+            <PopupProvider>
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/add" element={<Add />} />
+                  <Route path="*" element={<Error />} />
+                </Routes>
+              </Layout>
+              <ShowPopup />
+            </PopupProvider>
+          </BrowserRouter>
+        </AuthProvider>
       </DatabaseProvdier>
     </div>
   );
