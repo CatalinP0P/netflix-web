@@ -6,6 +6,7 @@ import InfoButton from "../../components/InfoButton";
 import { useDB } from "../../context/DatabaseContext";
 import HorizontalShowcase from "../../components/HorizontalShowcase";
 import { usePopup } from "../../context/PopupContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Home() {
   const [showRandom, setRandomShow] = useState<any>();
@@ -18,6 +19,7 @@ export default function Home() {
 
   const [loading, setLoading] = useState(true);
   const popup = usePopup();
+  const auth = useAuth();
   const db = useDB();
 
   const openShow = (show: any) => {
@@ -130,6 +132,14 @@ export default function Home() {
           />
         ) : null}
       </Containter>
+      <button
+        onClick={async () => {
+          const token = await auth.user?.getIdToken();
+          console.log(token);
+        }}
+      >
+        Get token
+      </button>
     </>
   ) : null;
 }
