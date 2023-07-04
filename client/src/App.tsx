@@ -9,6 +9,7 @@ import { DatabaseProvdier } from "./context/DatabaseContext";
 import { PopupProvider } from "./context/PopupContext";
 import ShowPopup from "./components/popups/ShowPopup";
 import { AuthProvider } from "./context/AuthContext";
+import Signin from "./pages/Signin/Signin";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/add" element={<Add />} />
+                  <Route path="/signin" element={<Signin/>} />
                   <Route path="*" element={<Error />} />
                 </Routes>
               </Layout>
