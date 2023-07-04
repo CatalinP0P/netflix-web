@@ -1,4 +1,4 @@
-import React, { Children, createContext, useContext } from "react";
+import React, { Children, createContext, useContext, useEffect } from "react";
 import axios from "axios";
 
 const DatabaseContext = createContext<any>(null);
@@ -10,7 +10,9 @@ export const useDB = () => {
 export function DatabaseProvdier({ children }: { children: React.ReactNode }) {
   const get = async () => {
     try {
-      const shows = await axios.get("http://localhost:3001/shows");
+      const shows = await axios.get(
+        process.env.REACT_APP_SERVER_ADRESS + "shows"
+      );
       return shows.data;
     } catch (err) {
       console.log("Axios Error:", err);
@@ -21,7 +23,7 @@ export function DatabaseProvdier({ children }: { children: React.ReactNode }) {
   const getByCategory = async (category: string) => {
     try {
       const shows = await axios.get(
-        "http://localhost:3001/shows/category/" + category
+        process.env.REACT_APP_SERVER_ADRESS + "shows/category/" + category
       );
       return shows.data;
     } catch (err) {

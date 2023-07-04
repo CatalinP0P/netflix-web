@@ -21,7 +21,6 @@ export default function HorizontalShowcase({
     const div: any = divRef.current;
 
     setHasScroll(div.scrollWidth > div.clientWidth);
-    console.log(div.scrollWidth > div.clientWidth);
   }, []);
 
   const handleScrollRight = (e: any) => {
