@@ -27,7 +27,7 @@ export function PopupProvider({ children }: { children: React.ReactNode }) {
     >
       {showVisibility && (
         <div
-          className="absolute left-0 top-0 w-full h-full bg-[rgba(0,0,0,.85)] z-[1000]"
+          className="fixed left-0 top-0 w-full h-full bg-[rgba(0,0,0,.85)] z-[1000]"
           onClick={closeAll}
         ></div>
       )}
