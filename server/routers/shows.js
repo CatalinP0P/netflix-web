@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const authValidation = require("../validation/auth");
 
 const {
   getAll,
@@ -17,9 +18,14 @@ router.get("/", async (req, res) => {
     res.sendStatus(500);
   }
 });
+
 router.get("/random", async (req, res) => {
   const show = await getRandom();
   res.json(show);
+});
+
+router.get("/mylist", authValidation.validateIdToken, async (req, res) => {
+  return "Da";
 });
 
 router.get("/:id", async (req, res) => {
