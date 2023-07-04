@@ -39,7 +39,6 @@ export default function Header() {
   }, []);
 
   const handleScroll = (e: any) => {
-    console.log(window.scrollY);
     if (window.scrollY <= 5) setTop(true);
     else setTop(false);
   };

@@ -37,12 +37,23 @@ export function DatabaseProvdier({ children }: { children: React.ReactNode }) {
     return show.data;
   };
 
+  const getMyList = async () => {
+    const shows = await req.get("/shows/mylist");
+    return shows.data;
+  };
+
+  const toggleShow = async () => {
+    const response = await req.post("")
+  }
+
   return (
     <DatabaseContext.Provider
       value={{
         get: get,
         getByCategory: getByCategory,
         getRandomShow: getRandomShow,
+
+        getMyList: getMyList,
       }}
     >
       {children}

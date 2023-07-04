@@ -10,6 +10,12 @@ const {
   getRandom,
 } = require("../utils/database/showFunctions");
 
+const {
+  get,
+  getShowState,
+  toggleShow,
+} = require("../utils/database/listFunctions");
+
 router.get("/", async (req, res) => {
   try {
     const shows = await getAll();
@@ -25,8 +31,35 @@ router.get("/random", async (req, res) => {
 });
 
 router.get("/mylist", authValidation.validateIdToken, async (req, res) => {
-  return "Da";
+  const shows = await get(req.user.uid);
+  var list = [];
+
+  for (var i = 0; i < shows.length; i++) {
+    const show = await getById(shows[i].showID);
+    console.log(shows[i])
+    list.push(show);
+  }
+
+  res.json(list);
 });
+
+router.post(
+  "/mylist/:productid",
+  authValidation.validateIdToken,
+  async (req, res) => {
+    const response = await toggleShow(req.user.uid, req.params.productid);
+    res.send(response);
+  }
+);
+
+router.get(
+  "/mylist/:productid",
+  authValidation.validateIdToken,
+  async (req, res) => {
+    const response = await getShowState(req.user.uid, req.params.productid);
+    res.send(response);
+  }
+);
 
 router.get("/:id", async (req, res) => {
   const show = await getById(req.params.id);

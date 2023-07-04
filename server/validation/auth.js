@@ -9,9 +9,9 @@ const validateIdToken = async (req, res, next) => {
 
   admin
     .auth()
-    .validateIdToken(token)
+    .verifyIdToken(token)
     .then((userCredentials) => {
-      req.user = userCredentials.user;
+      req.user = userCredentials;
       return next();
     })
     .catch((err) => {
