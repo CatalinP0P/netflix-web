@@ -11,6 +11,11 @@ const getAll = async (category = "") => {
   return response;
 };
 
+const getRandom = async () => {
+  const show = await shows.aggregate([{ $sample: { size: 1 } }]).toArray();
+  return show[0];
+};
+
 const getById = async (id) => {
   const show = await shows.findOne({ _id: new ObjectId(id) });
 
@@ -42,5 +47,6 @@ module.exports = {
   getById: getById,
   searchByTitle: searchByTitle,
   addShow: addShow,
-  searchByCategory: searchByCategory
+  searchByCategory: searchByCategory,
+  getRandom: getRandom,
 };
