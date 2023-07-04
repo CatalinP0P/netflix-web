@@ -6,6 +6,7 @@ const {
   searchByTitle,
   searchByCategory,
   addShow,
+  getRandom,
 } = require("../utils/database/showFunctions");
 
 router.get("/", async (req, res) => {
@@ -15,6 +16,10 @@ router.get("/", async (req, res) => {
   } catch (err) {
     res.sendStatus(500);
   }
+});
+router.get("/random", async (req, res) => {
+  const show = await getRandom();
+  res.json(show);
 });
 
 router.get("/:id", async (req, res) => {
