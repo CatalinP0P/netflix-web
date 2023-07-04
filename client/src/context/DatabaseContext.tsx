@@ -18,8 +18,22 @@ export function DatabaseProvdier({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const getByCategory = async (category: string) => {
+    try {
+      const shows = await axios.get(
+        "http://localhost:3001/shows/category/" + category
+      );
+      return shows.data;
+    } catch (err) {
+      console.log("Axios Error:", err);
+      return null;
+    }
+  };
+
   return (
-    <DatabaseContext.Provider value={{ get: get }}>
+    <DatabaseContext.Provider
+      value={{ get: get, getByCategory: getByCategory }}
+    >
       {children}
     </DatabaseContext.Provider>
   );

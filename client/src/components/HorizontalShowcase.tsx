@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Containter from "./Containter";
 import { ReactComponent as Arrow } from "../assets/angle-left.svg";
 import { usePopup } from "../context/PopupContext";
@@ -12,8 +12,17 @@ export default function HorizontalShowcase({
   shows: any[];
   className?: string;
 }) {
+  const [hasScroll, setHasScroll] = useState(true);
+
   const popup = usePopup();
   const divRef = useRef(null);
+
+  useEffect(() => {
+    const div: any = divRef.current;
+
+    setHasScroll(div.scrollWidth > div.clientWidth);
+    console.log(div.scrollWidth > div.clientWidth);
+  }, []);
 
   const handleScrollRight = (e: any) => {
     const div: any = divRef.current;
@@ -35,23 +44,28 @@ export default function HorizontalShowcase({
       <label className="z-[100] ms-2 font-medium text-xl">{title}</label>
       <div
         ref={divRef}
-        className="group flex flex-row overflow-x-scroll scroll-smooth justify-between overflow-y-hidden gap-1 z-[100] scroll-hide"
+        className="group flex flex-row overflow-x-scroll scroll-smooth justify-start overflow-y-hidden gap-1 z-[100] scroll-hide"
       >
-        <div
-          className={
-            "hidden hover:border border-white group-hover:flex absolute z-[101] h-[81%] w-[50px] left-0 top-8 bg-[rgba(0,0,0,.75)] flex-row justify-center items-center cursor-pointer "
-          }
-          onClick={handleScrollLeft}
-        >
-          <Arrow className="fill-white h-[32px]" />
-        </div>
+        {hasScroll && (
+          <>
+            <div
+              className={
+                "hidden hover:border border-white group-hover:flex absolute z-[101] h-[81%] w-[50px] left-0 top-8 bg-[rgba(0,0,0,.75)] flex-row justify-center items-center cursor-pointer "
+              }
+              onClick={handleScrollLeft}
+            >
+              <Arrow className="fill-white h-[32px]" />
+            </div>
 
-        <div
-          className="hidden hover:border border-white group-hover:flex absolute z-[101] h-[81%] w-[50px] right-0 top-8 bg-[rgba(0,0,0,.75)] flex-row justify-center items-center cursor-pointer"
-          onClick={handleScrollRight}
-        >
-          <Arrow className="fill-white h-[32px] rotate-180" />
-        </div>
+            <div
+              className="hidden hover:border border-white group-hover:flex absolute z-[101] h-[81%] w-[50px] right-0 top-8 bg-[rgba(0,0,0,.75)] flex-row justify-center items-center cursor-pointer"
+              onClick={handleScrollRight}
+            >
+              <Arrow className="fill-white h-[32px] rotate-180" />
+            </div>
+          </>
+        )}
+
         {shows.map((show: any) => {
           return (
             <img
