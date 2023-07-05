@@ -10,25 +10,28 @@ import { PopupProvider } from "./context/PopupContext";
 import ShowPopup from "./components/popups/ShowPopup";
 import { AuthProvider } from "./context/AuthContext";
 import Signin from "./pages/Signin/Signin";
+import { MyListProvider } from "./context/MyListContext";
 
 function App() {
   return (
     <div>
       <DatabaseProvdier>
         <AuthProvider>
-          <BrowserRouter>
-            <PopupProvider>
-              <Layout>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/add" element={<Add />} />
-                  <Route path="/signin" element={<Signin/>} />
-                  <Route path="*" element={<Error />} />
-                </Routes>
-              </Layout>
-              <ShowPopup />
-            </PopupProvider>
-          </BrowserRouter>
+          <MyListProvider>
+            <BrowserRouter>
+              <PopupProvider>
+                <Layout>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/add" element={<Add />} />
+                    <Route path="/signin" element={<Signin />} />
+                    <Route path="*" element={<Error />} />
+                  </Routes>
+                </Layout>
+                <ShowPopup />
+              </PopupProvider>
+            </BrowserRouter>
+          </MyListProvider>
         </AuthProvider>
       </DatabaseProvdier>
     </div>
