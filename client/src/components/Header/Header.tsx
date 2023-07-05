@@ -18,9 +18,10 @@ import { ReactComponent as Exit } from "../../assets/arrow-up-right-from-square.
 import { ReactComponent as Movie } from "../../assets/movie-svgrepo-com.svg";
 import { ReactComponent as List } from "../../assets/list.svg";
 
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { usePopup } from "../../context/PopupContext";
 import { useAuth } from "../../context/AuthContext";
+import { useLocation } from "react-router-dom";
 
 export default function Header() {
   const [top, setTop] = useState(true);
@@ -29,9 +30,11 @@ export default function Header() {
     setMobileMenuVisibility,
     accountVisibility,
     setAccountVisibility,
+    closeAll,
   } = usePopup();
 
   const navigate = useNavigate();
+  const location = useLocation();
   const auth = useAuth();
 
   useEffect(() => {
@@ -73,7 +76,13 @@ export default function Header() {
                 " flex-col absolute gap-[.125rem] z-[10001] rounded-sm text-xs left-0 top-14 transition-all bg-[#262626] min-w-[200px] w-fit h-fit"
               }
             >
-              <div className="flex flex-row items-center gap-2 text-white p-3">
+              <div
+                className="flex flex-row items-center gap-2 text-white p-3 cursor-pointer"
+                onClick={() => {
+                  navigate("/");
+                  closeAll();
+                }}
+              >
                 <img src={SmallLogo} className=" h-[16px]" />
                 <label>Netflix Web</label>
               </div>
@@ -99,7 +108,13 @@ export default function Header() {
                 <label>New & Popular</label>
               </div>
 
-              <div className="p-2 mx-1 flex flex-row items-center gap-2 hover:bg-[#484444] rounded-sm">
+              <div
+                className="p-2 mx-1 flex flex-row items-center gap-2 hover:bg-[#484444] rounded-sm cursor-pointer"
+                onClick={() => {
+                  navigate("/my-list");
+                  closeAll();
+                }}
+              >
                 <List className="w-[16px] h-[16px] fill-white" />
                 <label>My List</label>
               </div>
@@ -112,11 +127,52 @@ export default function Header() {
           </div>
 
           <div className="hidden lg:flex flex-row gap-6 text-sm font-light items-center text-muted">
-            <a className="font-semibold text-white">Home</a>
-            <a>TV Shows</a>
-            <a>Movies</a>
-            <a>New & Popular</a>
-            <a>My List</a>
+            <a
+              href="/"
+              className={
+                location.pathname == "/" ? "font-semibold text-white" : ""
+              }
+            >
+              Home
+            </a>
+            <a
+              href="/tv-shows"
+              className={
+                location.pathname == "/tv-shows"
+                  ? "font-semibold text-white"
+                  : ""
+              }
+            >
+              TV Shows
+            </a>
+            <a
+              href="/movies"
+              className={
+                location.pathname == "/movies" ? "font-semibold text-white" : ""
+              }
+            >
+              Movies
+            </a>
+            <a
+              href="/new-and-popular"
+              className={
+                location.pathname == "/new-and-popular"
+                  ? "font-semibold text-white"
+                  : ""
+              }
+            >
+              New & Popular
+            </a>
+            <a
+              href="/my-list"
+              className={
+                location.pathname == "/my-list"
+                  ? "font-semibold text-white"
+                  : ""
+              }
+            >
+              My List
+            </a>
           </div>
         </div>
         <div className="flex flex-row items-center gap-6">
