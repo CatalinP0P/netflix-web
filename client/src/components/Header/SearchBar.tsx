@@ -1,8 +1,17 @@
-import React, { useState } from "react";
-import searchSvg from "../../assets/search.svg"
+import React, { useState, useEffect } from "react";
+import searchSvg from "../../assets/search.svg";
+import { useDB } from "../../context/DatabaseContext";
+import { useSearch } from "../../context/SearchContext";
 
 export default function SearchBar() {
   const [searchVisiblity, setSearch] = useState(false);
+  const [titleQ, setTitleQ] = useState("");
+  const db = useDB();
+  const { search } = useSearch();
+
+  const handleChange = async (e: any) => {
+    await search(e.target.value);
+  };
 
   const toggleSearch = () => {
     setSearch(!searchVisiblity);
@@ -19,6 +28,7 @@ export default function SearchBar() {
     >
       <img src={searchSvg} className="h-[18x]" onClick={toggleSearch} />
       <input
+        onChange={handleChange}
         placeholder="Search..."
         className={
           "outline-none bg-transparent text-white px-2 w-full " +

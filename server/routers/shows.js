@@ -8,6 +8,7 @@ const {
   searchByCategory,
   addShow,
   getRandom,
+  getNew,
 } = require("../utils/database/showFunctions");
 
 const {
@@ -28,6 +29,11 @@ router.get("/", async (req, res) => {
 router.get("/random", async (req, res) => {
   const show = await getRandom();
   res.json(show);
+});
+
+router.get("/new", async (req, res) => {
+  const shows = await getNew();
+  res.json(shows)
 });
 
 router.get("/mylist", authValidation.validateIdToken, async (req, res) => {
