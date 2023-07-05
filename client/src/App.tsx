@@ -3,7 +3,6 @@ import Layout from "./Layout";
 import { Router, Routes, Route, Link, BrowserRouter } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Add from "./pages/Add/Add";
-
 import Error from "./pages/Error/Error";
 import { DatabaseProvdier } from "./context/DatabaseContext";
 import { PopupProvider } from "./context/PopupContext";
@@ -11,6 +10,7 @@ import ShowPopup from "./components/popups/ShowPopup";
 import { AuthProvider } from "./context/AuthContext";
 import Signin from "./pages/Signin/Signin";
 import { MyListProvider } from "./context/MyListContext";
+import MyList from "./pages/MyList/MyList";
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
                 <Layout>
                   <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/my-list" element={<MyList/>} />
                     <Route path="/add" element={<Add />} />
                     <Route path="/signin" element={<Signin />} />
                     <Route path="*" element={<Error />} />

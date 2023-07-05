@@ -41,7 +41,6 @@ export function AuthProvider({ children }: { children?: React.ReactNode }) {
   useEffect(() => {
     app.auth().onAuthStateChanged(async (user: any) => {
       setUser(user);
-      console.log(user);
       if (user) {
         const token = await user.getIdToken();
         setToken(token);
