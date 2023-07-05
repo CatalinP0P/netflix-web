@@ -8,13 +8,15 @@ export const useSearch = () => {
 };
 
 export function SerachProvider({ children }: { children: React.ReactNode }) {
-  const [shows, setShows] = useState<any[]>([]);
+  const [shows, setShows] = useState<any>(null);
+  const [q, setQ] = useState("");
 
   const db = useDB();
 
   const search = async (title: string) => {
+    setQ(title);
     if (title.length <= 1) {
-      setShows([]);
+      setShows(null);
     } else {
       const results = await db.searchByTitle(title);
       setShows(results);
@@ -22,7 +24,7 @@ export function SerachProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <SearchContext.Provider value={{ search: search, shows: shows }}>
+    <SearchContext.Provider value={{ search: search, shows: shows, q: q }}>
       {children}
     </SearchContext.Provider>
   );

@@ -28,7 +28,7 @@ export default function Home() {
   const auth = useAuth();
   const db = useDB();
 
-  const { shows } = useSearch();
+  const { shows, q } = useSearch();
 
   const openShow = (show: any) => {
     popup.setShow(show);
@@ -65,7 +65,7 @@ export default function Home() {
   }, []);
 
   return !loading ? (
-    shows.length ? (
+    shows && q ? (
       <GridShowcase shows={shows} />
     ) : (
       <>
