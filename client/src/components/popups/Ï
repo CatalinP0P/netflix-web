@@ -3,23 +3,18 @@ import { usePopup } from "../../context/PopupContext";
 import { ReactComponent as XMark } from "../../assets/x.svg";
 import { ReactComponent as Plus } from "../../assets/plus.svg";
 import PlayButton from "../PlayButton";
-import { ReactComponent as Minus } from "../../assets/minus.svg";
 import { useMyList } from "../../context/MyListContext";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
 
 export default function ShowPopup() {
   const { show, showVisibility, closeAll } = usePopup();
   const [inMyList, setInMyList] = useState(false);
   const { MyList, toggle } = useMyList();
-  const navigate = useNavigate();
-  const { user } = useAuth();
 
   useEffect(() => {
     if (!show) return;
     if (MyList.find((m: any) => m._id == show._id)) {
       setInMyList(true);
-    } else setInMyList(false);
+    }
   }, [show]);
 
   return !show ? null : (
@@ -49,29 +44,23 @@ export default function ShowPopup() {
               onClick={() => closeAll()}
             />
           </div>
-          <div className="flex flex-row justify-between px-8 py-2 z-[1005]">
-            <div className="flex flex-row gap-2 items-center pointer-events-auto">
+          <div className="flex flex-row justify-between px-8 py-2">
+            <div className="flex flex-row gap-2 items-center z-[1005]">
               <PlayButton />
               {inMyList ? (
-                <Minus
-                  className="w-[30px] h-[30px] p-1 fill-white border border-white rounded-full bg-[#171717] opacity-50 hover:opacity-90 cursor-pointer"
-                  onClick={async () => {
-                    if (!user) {
-                      closeAll();
-                      return navigate("/signin");
-                    }
-                    setInMyList(await toggle(show._id));
+                <button
+                  onClick={() => {
+                    toggle(show._id);
                   }}
-                />
+                >
+                  Remove from List
+                </button>
               ) : (
                 <Plus
                   className="w-[30px] h-[30px] p-1 fill-white border border-white rounded-full bg-[#171717] opacity-50 hover:opacity-90 cursor-pointer"
                   onClick={async () => {
-                    if (!user) {
-                      closeAll();
-                      return navigate("/signin");
-                    }
-                    setInMyList(await toggle(show._id));
+                    console.log("Da");
+                    await toggle(show._id);
                   }}
                 />
               )}

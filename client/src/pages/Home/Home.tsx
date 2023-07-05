@@ -7,6 +7,7 @@ import { useDB } from "../../context/DatabaseContext";
 import HorizontalShowcase from "../../components/HorizontalShowcase";
 import { usePopup } from "../../context/PopupContext";
 import { useAuth } from "../../context/AuthContext";
+import { useMyList } from "../../context/MyListContext";
 
 export default function Home() {
   const [showRandom, setRandomShow] = useState<any>();
@@ -18,6 +19,9 @@ export default function Home() {
   const [showsDocumentaries, setShowsDocumentaries] = useState(null);
 
   const [loading, setLoading] = useState(true);
+
+  const { MyList } = useMyList();
+
   const popup = usePopup();
   const auth = useAuth();
   const db = useDB();
@@ -84,7 +88,14 @@ export default function Home() {
             <InfoButton onClick={() => openShow(showRandom)} />
           </div>
         </div>
-        {showsAction && showsTrending ? (
+        {MyList.length ? (
+          <HorizontalShowcase
+            className="mt-16"
+            title="My List"
+            shows={MyList}
+          />
+        ) : null}
+        {showsTrending ? (
           <HorizontalShowcase
             className="mt-16"
             title="Trending Now"
@@ -132,14 +143,6 @@ export default function Home() {
           />
         ) : null}
       </Containter>
-      <button
-        onClick={async () => {
-          const token = await auth.user?.getIdToken();
-          console.log(token);
-        }}
-      >
-        Get token
-      </button>
     </>
   ) : null;
 }

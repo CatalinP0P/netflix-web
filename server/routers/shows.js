@@ -36,7 +36,7 @@ router.get("/mylist", authValidation.validateIdToken, async (req, res) => {
 
   for (var i = 0; i < shows.length; i++) {
     const show = await getById(shows[i].showID);
-    console.log(shows[i])
+    console.log(shows[i]);
     list.push(show);
   }
 
@@ -44,10 +44,10 @@ router.get("/mylist", authValidation.validateIdToken, async (req, res) => {
 });
 
 router.post(
-  "/mylist/:productid",
+  "/mylist/:showID",
   authValidation.validateIdToken,
   async (req, res) => {
-    const response = await toggleShow(req.user.uid, req.params.productid);
+    const response = await toggleShow(req.user.uid, req.params.showID);
     res.send(response);
   }
 );

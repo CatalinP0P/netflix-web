@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useMyList } from "./MyListContext";
 
 const PopupContext = createContext<any>(null);
 
@@ -11,7 +12,7 @@ export function PopupProvider({ children }: { children: React.ReactNode }) {
   const [mobileMenuVisibility, setMobileMenuVisibility] = useState(false);
   const [accountVisibility, setAccountVisibility] = useState(false);
 
-  const [show, setShow] = useState(null);
+  const [show, setShow] = useState<any>(null);
 
   const closeAll = () => {
     setShowVisibility(false);

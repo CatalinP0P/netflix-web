@@ -1,11 +1,18 @@
 import app from "../lib/firebase";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import {
   GoogleAuthProvider,
   User,
   signInAnonymously,
   signInWithCredential,
 } from "firebase/auth";
+import { useDB } from "./DatabaseContext";
 
 interface ContextProps {
   user: User | null;
@@ -29,10 +36,16 @@ export function AuthProvider({ children }: { children?: React.ReactNode }) {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const { setToken } = useDB();
+
   useEffect(() => {
-    app.auth().onAuthStateChanged((user: any) => {
+    app.auth().onAuthStateChanged(async (user: any) => {
       setUser(user);
       console.log(user);
+      if (user) {
+        const token = await user.getIdToken();
+        setToken(token);
+      }
       setLoading(false);
     });
   }, []);
@@ -46,13 +59,13 @@ export function AuthProvider({ children }: { children?: React.ReactNode }) {
     const provider = new GoogleAuthProvider();
     try {
       const user = await app.auth().signInWithPopup(provider);
-      setUser(user);
+      setUser(user.user);
     } catch (err) {
       console.log(err);
     }
   };
 
-  return (
+  return loading ? null : (
     <AuthContext.Provider
       value={{
         user: user,
