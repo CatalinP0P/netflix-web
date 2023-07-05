@@ -37,9 +37,19 @@ export function DatabaseProvdier({ children }: { children: React.ReactNode }) {
     return show.data;
   };
 
+  const searchByTitle = async (title: string) => {
+    const shows = await req.get("/shows/q/" + title);
+    return shows.data;
+  };
+
   const getRandomShow = async () => {
     const show = await req.get("/shows/random");
     return show.data;
+  };
+
+  const getNew = async () => {
+    const shows = await req.get("/shows/new");
+    return shows.data;
   };
 
   const getMyList = async () => {
@@ -74,6 +84,8 @@ export function DatabaseProvdier({ children }: { children: React.ReactNode }) {
         getByCategory: getByCategory,
         getRandomShow: getRandomShow,
         getById: getById,
+        getNew: getNew,
+        searchByTitle: searchByTitle,
 
         getMyList: getMyList,
         toggleShow: toggleShow,

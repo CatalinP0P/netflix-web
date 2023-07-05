@@ -11,6 +11,10 @@ import { AuthProvider } from "./context/AuthContext";
 import Signin from "./pages/Signin/Signin";
 import { MyListProvider } from "./context/MyListContext";
 import MyList from "./pages/MyList/MyList";
+import NewAndPopular from "./pages/NewAndPopular/NewAndPopular";
+import Movies from "./pages/Movies/Movies";
+import SearchBar from "./components/Header/SearchBar";
+import { SerachProvider } from "./context/SearchContext";
 
 function App() {
   return (
@@ -18,20 +22,28 @@ function App() {
       <DatabaseProvdier>
         <AuthProvider>
           <MyListProvider>
-            <BrowserRouter>
-              <PopupProvider>
-                <Layout>
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/my-list" element={<MyList/>} />
-                    <Route path="/add" element={<Add />} />
-                    <Route path="/signin" element={<Signin />} />
-                    <Route path="*" element={<Error />} />
-                  </Routes>
-                </Layout>
-                <ShowPopup />
-              </PopupProvider>
-            </BrowserRouter>
+            <SerachProvider>
+              <BrowserRouter>
+                <PopupProvider>
+                  <Layout>
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/my-list" element={<MyList />} />
+                      <Route
+                        path="/new-and-popular"
+                        element={<NewAndPopular />}
+                      />
+                      <Route path="/movies" element={<Movies />} />
+                      <Route path="/tv-shows" element={<Movies />} />
+                      <Route path="/add" element={<Add />} />
+                      <Route path="/signin" element={<Signin />} />
+                      <Route path="*" element={<Error />} />
+                    </Routes>
+                  </Layout>
+                  <ShowPopup />
+                </PopupProvider>
+              </BrowserRouter>
+            </SerachProvider>
           </MyListProvider>
         </AuthProvider>
       </DatabaseProvdier>

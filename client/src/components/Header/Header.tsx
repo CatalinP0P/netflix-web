@@ -22,9 +22,11 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { usePopup } from "../../context/PopupContext";
 import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
+import { useDB } from "../../context/DatabaseContext";
 
 export default function Header() {
   const [top, setTop] = useState(true);
+
   const {
     mobileMenuVisibility,
     setMobileMenuVisibility,
@@ -45,6 +47,7 @@ export default function Header() {
     if (window.scrollY <= 5) setTop(true);
     else setTop(false);
   };
+
 
   return (
     <div

@@ -42,6 +42,13 @@ const addShow = async (show) => {
   return response.insertedId;
 };
 
+const getNew = async () => {
+  const response = await shows
+    .find({ year: new Date().getFullYear() })
+    .toArray();
+  return response;
+};
+
 module.exports = {
   getAll: getAll,
   getById: getById,
@@ -49,4 +56,5 @@ module.exports = {
   addShow: addShow,
   searchByCategory: searchByCategory,
   getRandom: getRandom,
+  getNew: getNew,
 };
